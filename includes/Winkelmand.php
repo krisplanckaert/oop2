@@ -34,10 +34,11 @@ class Winkelmand {
      */
     public function toevoegenAanMand($items) {
         // We lussen over het bestaande mandje om te zien of er reeds een element met hetzelfde id bestaat in onze mand
+        //var_dump($this->mand);
         foreach ($this->mand as $key => $value) {
             if ($this->mand[$key]['id'] == $items['id']) {
                 $this->mand[$key]['aantal'] += $items['aantal'];
-                //die('gelukt');
+    
                 return;// stop met code uit te voeren, we verwachten maar één element en die hebben we gehad!
             }
         }
@@ -80,7 +81,11 @@ class Winkelmand {
     }
 
     public function getAantal($id) {
-        return $this->mand[$id]['aantal'];
+        foreach ($this->mand as $key => $value) {
+            if ($this->mand[$key]['id'] == $id) {
+                return $this->mand[$key]['aantal'];
+            }
+        }        
     }
 }
 

@@ -12,14 +12,11 @@ error_reporting(E_ALL);
     </head>
     <body>
         <?php 
-            $id = $_GET['id'];
+            $id = isset($_POST) ? (int)$_POST['id'] : (int)$_GET['id'];
             session_start();  
-            $products = $_SESSION['products'];
-            
-            $items = array('id' => $id, 'aantal' => $_SESSION['winkelmand']->getAantal($id));
+            $items = array('id' => $id, 'aantal' => 1);
             $_SESSION['winkelmand']->toevoegenAanMand($items);
-            
-            echo $products[$id]['titel'] . '<br />' . $products[$id]['prijs'];
+            echo $_SESSION['products'][$id]['titel'] . '<br />' . $_SESSION['products'][$id]['prijs'];
         ?>
         <a href="index.php">Bestel</a>
     </body>
